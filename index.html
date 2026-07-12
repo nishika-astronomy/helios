@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELIOS - Interactive Solar Magnetic Reconnection Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Scripts loaded with defer to ensure execution order -->
+    <script src="simulation.js" defer></script>
+    <script src="graph.js" defer></script>
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="status-indicator-dot"></span>
+                <h1 class="title">
+                    HELIOS
+                </h1>
+            </div>
+            <p class="subtitle">Interactive Solar Magnetic Reconnection Simulator</p>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="app-workspace">
+            
+            <!-- Solar Simulation Window (Viewport Container) -->
+            <section class="viewport-card">
+                <div class="card-header">
+                    <span class="card-title">Solar Simulation Window</span>
+                    <span class="telemetry-tag">SYS-READY</span>
+                </div>
+                <div class="simulation-viewport">
+                    <!-- HTML5 Simulation Canvas -->
+                    <canvas id="simulation-canvas"></canvas>
+                    
+                    <div class="hud-corners">
+                        <div class="hud-corner top-left"></div>
+                        <div class="hud-corner top-right"></div>
+                        <div class="hud-corner bottom-left"></div>
+                        <div class="hud-corner bottom-right"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Split: Controls & Live Data -->
+                
+            <!-- Controls Panel -->
+                <section class="panel-card controls-panel">
+                    <div class="card-header">
+                        <span class="card-title">INTERACTIVE CONTROLS</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-description">
+                            Explore how magnetic field strength and plasma conditions influence solar magnetic reconnection.
+                        </div>
+                        <div class="card-divider"></div>
+
+                        <!-- Sliders -->
+                        <div class="control-group">
+                            <div class="control-header">
+                                <label for="slider-field-strength">Magnetic Field Strength</label>
+                                <span class="control-value" id="val-field-strength">5.0 T</span>
+                            </div>
+                            <input type="range" id="slider-field-strength" min="1.0" max="10.0" step="0.1" value="5.0" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-header">
+                                <label for="slider-twist">Twist Build Rate</label>
+                                <span class="control-value" id="val-twist">0.0 rad</span>
+                            </div>
+                            <input type="range" id="slider-twist" min="0.0" max="3.14" step="0.05" value="0.0" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-header">
+                                <label for="slider-density">Plasma Density</label>
+                                <span class="control-value" id="val-density">1.0 × 10¹⁵ m⁻³</span>
+                            </div>
+                            <input type="range" id="slider-density" min="0.1" max="5.0" step="0.1" value="1.0" class="styled-slider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-header">
+                                <label for="slider-temperature">Plasma Temperature</label>
+                                <span class="control-value" id="val-temperature">1.5 MK</span>
+                            </div>
+                            <input type="range" id="slider-temperature" min="0.5" max="5.0" step="0.1" value="1.5" class="styled-slider">
+                        </div>
+
+                        <!-- Buttons Group -->
+                        <div class="button-group">
+                            <button id="btn-start" class="btn btn-primary" aria-label="Start Simulation">
+                                <span class="btn-icon">▶</span> Start
+                            </button>
+                            <button id="btn-pause" class="btn btn-secondary" aria-label="Pause Simulation">
+                                <span class="btn-icon">⏸</span> Pause
+                            </button>
+                            <button id="btn-reset" class="btn btn-danger" aria-label="Reset Simulation">
+                                <span class="btn-icon">🔄</span> Reset
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Live Data Panel -->
+                <section class="panel-card telemetry-panel">
+                    <div class="card-header">
+                        <span class="card-title">Live Data Panel</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-description">
+                            Monitor magnetic energy, plasma dynamics and reconnection diagnostics in real time.
+                        </div>
+                        <div class="card-divider"></div>
+                        <div class="data-grid">
+                            
+                            <div class="data-item">
+                                <div class="data-label">Simulation State</div>
+                                <div class="data-value state-stable" id="data-state">STABLE</div>
+                            </div>
+
+                            <div class="data-item">
+                                <div class="data-label">Stored Magnetic Energy</div>
+                                <div class="data-value" id="data-energy">0.00 MJ</div>
+                            </div>
+
+                            <div class="data-item">
+                                <div class="data-label">Stress Level</div>
+                                <div class="data-value" id="data-stress">0.0%</div>
+                            </div>
+
+                            <div class="data-item">
+                                <div class="data-label">Particle Count</div>
+                                <div class="data-value" id="data-particles">0</div>
+                            </div>
+
+                            <div class="data-item">
+                                <div class="data-label">Average Plasma Speed</div>
+                                <div class="data-value" id="data-speed">0.0 km/s</div>
+                            </div>
+
+                            <div class="data-item">
+                                <div class="data-label">Average Plasma Temp</div>
+                                <div class="data-value" id="data-temp">0.00 MK</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+
+            <!-- Magnetic Energy vs Time Area -->
+            <section class="panel-card graph-card">
+                <div class="card-header">
+                    <span class="card-title">Magnetic Energy vs Time</span>
+                    <span class="telemetry-tag">REAL-TIME</span>
+                </div>
+                <div class="graph-viewport">
+                    <canvas id="energy-graph"></canvas>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>
