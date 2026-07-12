@@ -12,7 +12,7 @@ Helios is an interactive educational web application that visualizes **solar mag
 
 ## 🌐 Live Demo
 
-🔗 **Website:** *(Add deployment link here)*
+🔗 **Website:** https://nishika-astronomy.github.io/helios/
 
 ---
 
