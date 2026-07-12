@@ -1,4 +1,3 @@
-# helios
 # 🌞 Helios
 
 > **Interactive Solar Magnetic Reconnection Simulator**
@@ -43,9 +42,7 @@ Helios is based on fundamental concepts from electromagnetism and plasma physics
 
 ### Lorentz Force
 
-\[
-\mathbf{F}=q(\mathbf{E}+\mathbf{v}\times\mathbf{B})
-\]
+**F = q(E + v × B)**
 
 Determines the force acting on charged particles moving through electric and magnetic fields.
 
@@ -53,9 +50,7 @@ Determines the force acting on charged particles moving through electric and mag
 
 ### Magnetic Pressure
 
-\[
-P_B=\frac{B^2}{2\mu_0}
-\]
+**P = B² / (2μ₀)**
 
 Represents the pressure exerted by a magnetic field on the surrounding plasma.
 
@@ -63,9 +58,7 @@ Represents the pressure exerted by a magnetic field on the surrounding plasma.
 
 ### Magnetic Energy Density
 
-\[
-u_B=\frac{B^2}{2\mu_0}
-\]
+**u = B² / (2μ₀)**
 
 Describes the magnetic energy stored per unit volume.
 
@@ -73,9 +66,7 @@ Describes the magnetic energy stored per unit volume.
 
 ### Magnetic Flux
 
-\[
-\Phi=\int \mathbf{B}\cdot d\mathbf{A}
-\]
+**Φ = ∫ B · dA**
 
 Measures the total magnetic field passing through a surface.
 
